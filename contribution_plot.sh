@@ -31,8 +31,18 @@ nthday() {
   echo $((($(date -j -f "%Y-%m-%d" "$date" "+%s") - $(date -j -f "%Y-%m-%d" "$year-01-01" "+%s")) / 86400 + 1))
 }
 
+yearlength() {
+  year=$1
+  if (( !(year % 4) && ( year % 100 || !(year % 400) ) )); then
+    echo "366"
+  else
+    echo "365"
+  fi
+}
+
 fill_calendar() {
-  for i in {1..366}; do contrib_cnt_for_day[i]=0; done
+  yearlen=$(yearlength "$SELECTED_YEAR")
+  for i in $(seq 1 "$yearlen"); do contrib_cnt_for_day[i]=0; done
   OLDIFS=$IFS
   IFS=$'\n'
   for line in $INPUT_DATA; do

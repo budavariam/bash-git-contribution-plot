@@ -17,9 +17,9 @@ My intention was to have some fun with bash colors, and to get contribution info
 - [x] plot data for a single email
 - [x] plot data for a single year
 - [x] plot any local git repo
-- [ ] handle leap years
-- [ ] do not show the days that are due
-- [ ] for current year add option to show data from last year
+- [x] handle leap years
+- [ ] do not show future days as empty contribution, mark them with `noday_mark`
+- [ ] for current year add option to show data from last year to fill the gaps
 - [ ] make it easily runnable in docker (make it cross compatible)
 - [ ] add option to show all contribution per year
 - [ ] validate input
