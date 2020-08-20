@@ -14,12 +14,12 @@ My intention was to have some fun with bash colors, and to get contribution info
 
 ## Improvement ideas
 
-- [ + ] plot data for a single email
-- [ + ] plot data for a single year
-- [ + ] plot any local git repo
-- [ - ] handle leap years
-- [ - ] do not show the days that are due
-- [ - ] for current year add option to show data from last year
-- [ - ] make it easily runnable in docker (make it cross compatible)
-- [ - ] add option to show all contribution per year
-- [ - ] validate input
+- [x] plot data for a single email
+- [x] plot data for a single year
+- [x] plot any local git repo
+- [ ] handle leap years
+- [ ] do not show the days that are due
+- [ ] for current year add option to show data from last year
+- [ ] make it easily runnable in docker (make it cross compatible)
+- [ ] add option to show all contribution per year
+- [ ] validate input
