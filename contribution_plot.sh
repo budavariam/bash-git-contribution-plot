@@ -4,9 +4,9 @@ SELECTED_YEAR=${1:-2020}
 SELECTED_USER=${2:-"------"}
 GIT_FOLDER=${3:-.}
 
-pushd "$GIT_FOLDER" > /dev/null || exit 1
+pushd "$GIT_FOLDER" >/dev/null || exit 1
 INPUT_DATA=$(git log -a --date=format:'%Y-%m-%d' --pretty=format:"%ae %ad" | grep --color=no "$SELECTED_USER" | grep --color=no " $SELECTED_YEAR-" | sort -k1,1 -k2,2 | uniq -c | sed 's/^ *//')
-popd > /dev/null || exit 2
+popd >/dev/null || exit 2
 
 contrib_cnt_for_day=()
 plot=() # plot is the final result, 7 lines each containing the weekday results
@@ -81,11 +81,11 @@ get_plot() {
   done
 
   for i in "${!contrib_cnt_for_day[@]}"; do
-    plot[day]=$(printf "%s%s" "${plot[day]}" "$(contrib_mark "${contrib_cnt_for_day[$i]}")")
     day=$(((day % 7) + 1))
+    plot[day]=$(printf "%s%s" "${plot[day]}" "$(contrib_mark "${contrib_cnt_for_day[$i]}")")
   done
 
-  for ((i = day; i <= 7; i++)); do
+  for ((i = day + 1; i <= 7; i++)); do
     plot[i]=$(printf "%s%s" "${plot[i]}" "$(noday_mark)")
   done
 }
