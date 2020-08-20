@@ -9,7 +9,7 @@ My intention was to have some fun with bash colors, and to get contribution info
 ## Usage
 
 ```bash
-./contribution_plot 2019 ~/project/gitrepo example@domain.com
+./contribution_plot 2019 example@domain.com ~/project/gitrepo
 ```
 
 ## Improvement ideas
@@ -23,3 +23,4 @@ My intention was to have some fun with bash colors, and to get contribution info
 - [ ] make it easily runnable in docker (make it cross compatible)
 - [ ] add option to show all contribution per year
 - [ ] validate input
+- [ ] if no emal is given, offer selection from the repo contributor emails

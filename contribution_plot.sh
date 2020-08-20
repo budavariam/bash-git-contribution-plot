@@ -5,7 +5,14 @@ SELECTED_USER=${2:-"------"}
 GIT_FOLDER=${3:-.}
 
 pushd "$GIT_FOLDER" >/dev/null || exit 1
-INPUT_DATA=$(git log -a --date=format:'%Y-%m-%d' --pretty=format:"%ae %ad" | grep --color=no "$SELECTED_USER" | grep --color=no " $SELECTED_YEAR-" | sort -k1,1 -k2,2 | uniq -c | sed 's/^ *//')
+INPUT_DATA=$(\
+  git log -a --date=format:'%Y-%m-%d' --pretty=format:"%ae %ad" | \
+  grep --color=no "$SELECTED_USER" | \
+  grep --color=no " $SELECTED_YEAR-" | \
+  sort -k1,1 -k2,2 | \
+  uniq -c | \
+  sed 's/^ *//'\
+)
 popd >/dev/null || exit 2
 
 contrib_cnt_for_day=()
@@ -64,15 +71,16 @@ fill_calendar() {
 }
 
 contrib_mark() {
-  if [ "$1" -eq 0 ]; then
+  contrib_cnt=$1
+  if [ "$contrib_cnt" -eq 0 ]; then
     printf "%b" "$no_contrib"
-  elif [ "$1" -le "$level1top" ]; then
+  elif [ "$contrib_cnt" -le "$level1top" ]; then
     printf "%b" "$g1"
-  elif [ "$1" -le "$level2top" ]; then
+  elif [ "$contrib_cnt" -le "$level2top" ]; then
     printf "%b" "$g2"
-  elif [ "$1" -le "$level3top" ]; then
+  elif [ "$contrib_cnt" -le "$level3top" ]; then
     printf "%b" "$g3"
-  elif [ "$1" -le "$level4top" ]; then
+  elif [ "$contrib_cnt" -le "$level4top" ]; then
     printf "%b" "$g4"
   fi
 }
