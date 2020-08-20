@@ -28,7 +28,7 @@ g4="\e[48;5;46m \033[0m"
 nthday() {
   year=$1
   date=$2
-  echo $((($(date -j -f "%Y-%m-%d" "$date" "+%s") - $(date -j -f "%Y-%m-%d" "$year-01-01" "+%s")) / 86400))
+  echo $((($(date -j -f "%Y-%m-%d" "$date" "+%s") - $(date -j -f "%Y-%m-%d" "$year-01-01" "+%s")) / 86400 + 1))
 }
 
 fill_calendar() {
@@ -81,11 +81,11 @@ get_plot() {
   done
 
   for i in "${!contrib_cnt_for_day[@]}"; do
-    day=$(((day % 7) + 1))
     plot[day]=$(printf "%s%s" "${plot[day]}" "$(contrib_mark "${contrib_cnt_for_day[$i]}")")
+    day=$(((day % 7) + 1))
   done
 
-  for ((i = day + 1; i <= 7; i++)); do
+  for ((i = day; i <= 7; i++)); do
     plot[i]=$(printf "%s%s" "${plot[i]}" "$(noday_mark)")
   done
 }
